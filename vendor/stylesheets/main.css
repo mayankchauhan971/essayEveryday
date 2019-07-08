@@ -188,3 +188,11 @@ form {
 .editBar{
   width: 80%;	
 }
+
+.titleInput {
+    width: 100%;
+    padding: .5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
