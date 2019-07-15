@@ -6,20 +6,20 @@ $(window).scroll(function(){
     }
 });
 
-var newEssayForm = document.getElementById('newEssayForm');
+var editEssayForm = document.getElementById('editEssayForm');
+
 /**
  * Handle when user submit the article
  */
-newEssayForm.addEventListener('submit', function (event) {
+editEssayForm.addEventListener('submit', function (event) {
   event.preventDefault();
   
   // create essay payload
   const payload = {
-    title: newEssayForm.title.value,
+    title: editEssayForm.title.value,
     content: quill.getContents()
   }
-  
-  // Post it to server
+
   fetch('/write', {
     method: 'POST',
     body: JSON.stringify(payload),
@@ -27,14 +27,8 @@ newEssayForm.addEventListener('submit', function (event) {
       'Content-Type': 'application/json'
     }
   })
-    .then(function (response) {
-      return response.json()
-    })
-    .then(function (data) {
-      console.log('Essay successfully been created')
-      
-      // redirect user to edit page
-      window.location.href = '/edit-essay/' + data.newArticle._id;
+    .then(function () {
+      console.log('success')
     })
 })
 
@@ -46,6 +40,14 @@ var quill = new Quill('#editor-container', {
   placeholder: 'Your essay goes here...',
   theme: 'snow'
 });
+
+var existingContent = editEssayForm.content.value;
+/* if content is exists, set editor content */
+if (existingContent) {
+  // convert JSON string to javascript object
+  var content = JSON.parse(existingContent)
+  quill.setContents(content)
+}
 
 // Store accumulated changes
 var change = new Delta();
