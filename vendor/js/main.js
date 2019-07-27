@@ -6,44 +6,14 @@ $(window).scroll(function(){
     }
 });
 
-var newEssayForm = document.getElementById('newEssayForm');
-/**
- * Handle when user submit the article
- */
-newEssayForm.addEventListener('submit', function (event) {
-  event.preventDefault();
-  
-  // create essay payload
-  const payload = {
-    title: newEssayForm.title.value,
-    content: quill.getContents()
-  }
-  
-  // Post it to server
-  fetch('/write', {
-    method: 'POST',
-    body: JSON.stringify(payload),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(function (response) {
-      return response.json()
-    })
-    .then(function (data) {
-      console.log('Essay successfully been created')
-      
-      // redirect user to edit page
-      window.location.href = '/edit-essay/' + data.newArticle._id;
-    })
-})
+
 
 var Delta = Quill.import('delta');
 var quill = new Quill('#editor-container', {
   modules: {
-    toolbar: true
+    toolbar: true,
   },
-  placeholder: 'Your essay goes here...',
+  placeholder: 'Compose an epic...',
   theme: 'snow'
 });
 
@@ -52,6 +22,29 @@ var change = new Delta();
 quill.on('text-change', function(delta) {
   change = change.compose(delta);
 });
+
+
+
+// Save periodically
+setInterval(function() {
+  if (change.length() > 0) {
+    console.log('Saving changes', change);
+     
+    // Send partial changes
+    $.post('/write', { 
+      partial: JSON.stringify(change) 
+    });
+    
+    // Send entire document
+    $.post('/write', { 
+      doc: JSON.stringify(quill.getContents())
+    });
+    
+    change = new Delta();
+  }
+}, 5*1000);
+
+
 
 // Check for unsaved data
 window.onbeforeunload = function() {
