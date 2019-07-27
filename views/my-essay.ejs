@@ -1,0 +1,26 @@
+<% include partials/header%>
+
+<div class="ui main text container" style="padding-bottom: 80px;">
+	<div class="ui huge header" style="padding-top: 80px; ">My Essays</div>
+	<div class="ui top attached segment">
+		<div class="ui divided items"   >
+			<% articles.forEach(function(article){ %>
+			<div class="item">
+				<div class="image">
+				</div>
+				<div class="content">
+					<a class="header"><%= article.title %></a>
+					<div class="meta">
+					</div>
+					<div class="description">
+						<p>My blog content is html so i need text to shwo here</p>
+					</div>
+				</div>
+			</div>
+			<% }); %>
+		</div>
+	</div>
+
+</div>
+
+<%- include('partials/footer', { scripts: ['/js/my-essay.js'] }) %>

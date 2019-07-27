@@ -82,8 +82,21 @@ app.get('/write', isLoggedIn, function(req,res){
 	res.render("write");
 });
 
+app.get('/my-essay', (req, res) => {
+// //that is the id of the current logged in user
+  // const userId = ;
+
+  // query article with field of user equals to
+  // current logged-in user
+  Article.find({ user: req.user._id })
+    .then((articles) => {
+       res.render('my-essay', { articles })
+    })
+})
+
+
 // Render edit page
-app.get('/edit-essay/:id', isLoggedIn, function(req,res){
+app.get('/my-essay/:id/edit', isLoggedIn, function(req,res){
     Article.findById(req.params.id)
         .then(function (article) {
             res.render("edit-essay", {
@@ -96,9 +109,12 @@ app.get('/edit-essay/:id', isLoggedIn, function(req,res){
         })
         .catch(function (err) {
             res.send(err.message)
-        })
-    
+        })    
 });
+
+
+
+
 
 // Handle ajax request from client
 app.post('/write', function (req, res) {

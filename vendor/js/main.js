@@ -34,7 +34,7 @@ newEssayForm.addEventListener('submit', function (event) {
       console.log('Essay successfully been created')
       
       // redirect user to edit page
-      window.location.href = '/edit-essay/' + data.newArticle._id;
+      window.location.href = '/my-essay/' + data.newArticle._id + '/edit';
     })
 })
 
