@@ -117,6 +117,7 @@ app.get('/my-essay/:id/edit', isLoggedIn, function(req,res){
 
 
 // Handle ajax request from client
+// This one to create new article
 app.post('/write', function (req, res) {
     // get input from request body
     var content = req.body.content;
@@ -162,6 +163,31 @@ app.post('/write', function (req, res) {
         })
 
 })
+
+// For updating existing essay
+app.put('/essay/:id', function (request, response) {
+    var articleId = request.params.id;
+    var content = request.body.content;
+    var title =request.body.title;
+
+
+    Article.findById(articleId)
+        .then(function (article) {
+            if (!article) return response.status(404).json({
+                message: "Cant find article"
+            })
+
+            article.title = title;
+            article.content = content;
+
+            return article.save();
+        })
+        .then((data) => {
+            response.json({
+               article: data
+            })
+        });
+});
 
 
 // as we want to check isLoggedIn at multiple pages sp we make

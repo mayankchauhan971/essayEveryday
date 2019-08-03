@@ -7,10 +7,12 @@ $(window).scroll(function(){
 });
 
 var newEssayForm = document.getElementById('newEssayForm');
+var submitButton = document.getElementById('submitButton');
+
 /**
  * Handle when user submit the article
  */
-newEssayForm.addEventListener('submit', function (event) {
+submitButton.addEventListener('click', function (event) {
   event.preventDefault();
   
   // create essay payload

@@ -19,9 +19,10 @@ editEssayForm.addEventListener('submit', function (event) {
     title: editEssayForm.title.value,
     content: quill.getContents()
   }
+  const articleId = editEssayForm.articleId.value;
 
-  fetch('/write', {
-    method: 'POST',
+  fetch('/essay/' + articleId, {
+    method: 'PUT',
     body: JSON.stringify(payload),
     headers: {
       'Content-Type': 'application/json'
