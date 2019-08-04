@@ -14,6 +14,7 @@ var submitButton = document.getElementById('submitButton');
  */
 submitButton.addEventListener('click', function (event) {
   event.preventDefault();
+  window.onbeforeunload = null;
   
   // create essay payload
   const payload = {

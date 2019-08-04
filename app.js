@@ -3,7 +3,8 @@ var express = require('express'),
 	request = require('request'),
 	mongoose = require('mongoose'),
 	bodyParser = require('body-parser'),
-	path = require('path'),
+    path = require('path'),
+    cookieParser = require("cookie-parser"),
 	mongoose = require('mongoose'),
 	passport = require("passport"),
 	LocalStrategy = require("passport-local"),
@@ -17,6 +18,7 @@ mongoose.connect("mongodb://localhost:27017/essayEveryday", {useNewUrlParser: tr
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(cookieParser('secret'));
 
 // settings for hashing passwords
 app.use(require("express-session")({
@@ -35,6 +37,11 @@ passport.deserializeUser(User.deserializeUser());
 
 // static files path
 app.use(express.static(path.join(__dirname, 'vendor')));
+
+app.use(function (req, res, next) {
+  res.locals.login = req.isAuthenticated();
+  next();
+});
 
 // set my view engine i.e what i will use for templating
 app.set('view engine', 'ejs');
@@ -76,13 +83,13 @@ app.get('/logout', function(req,res){
 	res.redirect('/');
 });
 
-app.get('/write', isLoggedIn, function(req,res){
+app.get('/write', isLoggedIn,  function(req,res){
 	// if authenticated show write
 	// else login
-	res.render("write");
+	res.render("write", {login: req.user});
 });
 
-app.get('/my-essay', (req, res) => {
+app.get('/my-essay', isLoggedIn, (req, res) => {
 // //that is the id of the current logged in user
   // const userId = ;
 
@@ -92,6 +99,24 @@ app.get('/my-essay', (req, res) => {
     .then((articles) => {
        res.render('my-essay', { articles })
     })
+})
+
+
+app.get('/my-essay/:id', isLoggedIn,  function (req,res) {
+    Article.findById(req.params.id)
+        .then(function (article) {
+            // res.render("show-essay", {
+            //     data: {
+            //         articleId: article._id,
+            //         title: article.title,
+            //         content: JSON.stringify(article.content)
+            //     }
+            // });
+            res.send("Hey");
+        })
+        .catch(function (err) {
+            res.send(err.message)
+        })    
 })
 
 
@@ -190,7 +215,7 @@ app.put('/essay/:id', function (request, response) {
 });
 
 
-// as we want to check isLoggedIn at multiple pages sp we make
+// as we want to check at multiple pages sp we make
 // a separate function
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
