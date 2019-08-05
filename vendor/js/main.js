@@ -34,10 +34,13 @@ submitButton.addEventListener('click', function (event) {
       return response.json()
     })
     .then(function (data) {
-      console.log('Essay successfully been created')
+      console.log('Essay successfully created')
       
       // redirect user to edit page
       window.location.href = '/my-essay/' + data.newArticle._id + '/edit';
+    })
+    .catch(function(err){
+      res.send(err.message)
     })
 })
 

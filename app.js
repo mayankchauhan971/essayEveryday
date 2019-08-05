@@ -99,6 +99,9 @@ app.get('/my-essay', isLoggedIn, (req, res) => {
     .then((articles) => {
        res.render('my-essay', { articles })
     })
+    .catch(function (err) {
+            res.send(err.message)
+        })  
 })
 
 
