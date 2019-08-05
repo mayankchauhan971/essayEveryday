@@ -31,6 +31,9 @@ editEssayForm.addEventListener('submit', function (event) {
     .then(function () {
       console.log('success')
     })
+    .catch(function(err){
+      res.send(err.message)
+    })
 })
 
 var Delta = Quill.import('delta');
