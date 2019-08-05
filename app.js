@@ -214,7 +214,10 @@ app.put('/essay/:id', function (request, response) {
             response.json({
                article: data
             })
-        });
+        })
+        .catch(function(err){
+      res.send(err.message)
+    })
 });
 
 
