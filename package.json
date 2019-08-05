@@ -1,11 +1,11 @@
 {
-  "name": "essayeveryday",
+  "name": "essayEveryday",
   "version": "1.0.0",
   "description": "Everyday Essay App",
   "main": "app.js",
   "scripts": {
     "dev": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "Mayank Chauhan",
   "license": "ISC",
