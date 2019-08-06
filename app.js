@@ -14,13 +14,13 @@ var express = require('express'),
 	app = express()
 
 // CONNECT LOCAL MONGOOSE DATABASE
-// mongoose.connect("mongodb://localhost:27017/essayEveryday", {useNewUrlParser: true});
 
 app.set('port', (process.env.PORT || 3000));
-mongoose.connect("mongodb+srv://mayankchauhan971:essayeveryday@essayeveryday-vf1bi.mongodb.net/test?retryWrites=true&w=majority",
-	{
-		useNewUrlParser: true
-	});
+// mongoose.connect("mongodb://localhost:27017/essayEveryday", {useNewUrlParser: true});
+// mongoose.connect("mongodb+srv://mayankchauhan971:essayeveryday@essayeveryday-vf1bi.mongodb.net/test?retryWrites=true&w=majority",
+// 	{
+// 		useNewUrlParser: true
+// 	});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -241,6 +241,14 @@ function isLoggedIn(req, res, next){
 // 	console.log('App on 3000');
 // });
 
-app.listen(app.get("port"), function(){
-	console.log("running server on port");
-})
+Promise.resolve()
+  .then(() => {
+    mongoose.connect("mongodb+srv://mayankchauhan971:essayeveryday@essayeveryday-vf1bi.mongodb.net/test?retryWrites=true&w=majority", {
+		  useNewUrlParser: true
+	  });
+  })
+  .then(() => {
+    app.listen(app.get("port"), function(){
+      console.log("running server on port");
+    });
+  });
