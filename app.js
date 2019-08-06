@@ -243,7 +243,7 @@ function isLoggedIn(req, res, next){
 
 Promise.resolve()
   .then(() => {
-    mongoose.connect("mongodb+srv://mayankchauhan971:essayeveryday@essayeveryday-vf1bi.mongodb.net/test?retryWrites=true&w=majority", {
+    mongoose.connect("mongodb+srv://mayankchauhan:essayeveryday@essayeveryday-vf1bi.mongodb.net/test?retryWrites=true&w=majority", {
 		  useNewUrlParser: true
 	  });
   })
