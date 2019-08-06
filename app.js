@@ -14,13 +14,13 @@ var express = require('express'),
 	app = express()
 
 // CONNECT LOCAL MONGOOSE DATABASE
-mongoose.connect("mongodb://localhost:27017/essayEveryday", {useNewUrlParser: true});
+// mongoose.connect("mongodb://localhost:27017/essayEveryday", {useNewUrlParser: true});
 
 app.set('port', (process.env.PORT || 3000));
-// mongoose.connect("mongodb+srv://mayankchauhan971:mayach971@essayeveryday-vf1bi.mongodb.net/test?retryWrites=true&w=majority",
-// 	{
-// 		useNewUrlParser: true
-// 	});
+mongoose.connect("mongodb+srv://mayankchauhan971:essayeveryday@essayeveryday-vf1bi.mongodb.net/test?retryWrites=true&w=majority",
+	{
+		useNewUrlParser: true
+	});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
