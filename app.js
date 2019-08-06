@@ -104,9 +104,9 @@ app.get('/my-essay', isLoggedIn, (req, res) => {
        res.render('my-essay', { articles })
     })
     .catch(function (err) {
-            res.send(err.message)
+            res.send(err.message);
         })  
-})
+});
 
 
 app.get('/my-essay/:id', isLoggedIn,  function (req,res) {
@@ -122,9 +122,9 @@ app.get('/my-essay/:id', isLoggedIn,  function (req,res) {
             // res.render("Hey");
         })
         .catch(function (err) {
-            res.send(err.message)
-        })    
-})
+            res.send(err.message);
+        }) 
+});
 
 
 // Render edit page
@@ -140,7 +140,7 @@ app.get('/my-essay/:id/edit', isLoggedIn, function(req,res){
             });        
         })
         .catch(function (err) {
-            res.send(err.message)
+            res.send(err.message);
         })    
 });
 
@@ -194,7 +194,7 @@ app.post('/write', function (req, res) {
             });
         })
 
-})
+});
 
 // For updating existing essay
 app.put('/essay/:id', function (request, response) {
@@ -220,8 +220,8 @@ app.put('/essay/:id', function (request, response) {
             })
         })
         .catch(function(err){
-      res.send(err.message)
-    })
+	      res.send(err.message);
+	    })
 });
 
 
