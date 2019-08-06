@@ -14,11 +14,13 @@ var express = require('express'),
 	app = express()
 
 // CONNECT LOCAL MONGOOSE DATABASE
-// mongoose.connect("mongodb://localhost:27017/essayEveryday", {useNewUrlParser: true});
-mongoose.connect("mongodb+srv://mayankchauhan971:mayach971@essayeveryday-vf1bi.mongodb.net/test?retryWrites=true&w=majority",
-	{
-		useNewUrlParser: true
-	});
+mongoose.connect("mongodb://localhost:27017/essayEveryday", {useNewUrlParser: true});
+
+app.set('port', (process.env.PORT || 3000));
+// mongoose.connect("mongodb+srv://mayankchauhan971:mayach971@essayeveryday-vf1bi.mongodb.net/test?retryWrites=true&w=majority",
+// 	{
+// 		useNewUrlParser: true
+// 	});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -104,7 +106,7 @@ app.get('/my-essay', isLoggedIn, (req, res) => {
        res.render('my-essay', { articles })
     })
     .catch(function (err) {
-            res.send(err.message);
+            res.send(err.message);	
         })  
 });
 
@@ -122,7 +124,7 @@ app.get('/my-essay/:id', isLoggedIn,  function (req,res) {
             // res.render("Hey");
         })
         .catch(function (err) {
-            res.send(err.message);
+            res.send(err.message);	
         }) 
 });
 
@@ -140,7 +142,7 @@ app.get('/my-essay/:id/edit', isLoggedIn, function(req,res){
             });        
         })
         .catch(function (err) {
-            res.send(err.message);
+            res.send(err.message);	
         })    
 });
 
@@ -220,7 +222,7 @@ app.put('/essay/:id', function (request, response) {
             })
         })
         .catch(function(err){
-	      res.send(err.message);
+	      res.send(err.message);	
 	    })
 });
 
@@ -235,6 +237,10 @@ function isLoggedIn(req, res, next){
 }
 
 
-app.listen(3000, function(req,res){
-	console.log('App on 3000');
-});
+// app.listen(3000, function(req,res){
+// 	console.log('App on 3000');
+// });
+
+app.listen(app.get("port"), function(){
+	console.log("running server on port");
+})
