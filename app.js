@@ -14,7 +14,16 @@ var express = require('express'),
 	app = express()
 
 // CONNECT LOCAL MONGOOSE DATABASE
-mongoose.connect("mongodb://localhost:27017/essayEveryday", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://mayankchauhan971:mayach971@essayeveryday-vf1bi.mongodb.net/test?retryWrites=true&w=majority",
+	{
+		useNewUrlParser: true
+	})
+.then(() => {
+	console.log("Connected To DB");
+})
+.catch(err => {
+	console.log(err.message);
+})
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
