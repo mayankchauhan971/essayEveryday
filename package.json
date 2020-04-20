@@ -1,5 +1,5 @@
 {
-  "name": "essayEveryday",
+  "name": "essayeveryday",
   "version": "1.0.0",
   "description": "Everyday Essay App",
   "main": "app.js",
@@ -15,7 +15,7 @@
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "express-session": "^1.16.2",
-    "mongoose": "^5.6.2",
+    "mongoose": "^5.7.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1",
@@ -25,5 +25,13 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mayankchauhan971/essayEveryday.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mayankchauhan971/essayEveryday/issues"
+  },
+  "homepage": "https://github.com/mayankchauhan971/essayEveryday#readme"
 }
