@@ -230,9 +230,9 @@ app.put('/essay/:id', function (request, response) {
 // as we want to check at multiple pages sp we make
 // a separate function
 function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
+    // if(req.isAuthenticated()){
         return next();
-    }
+    // }
     res.redirect("/login");
 }
 
@@ -241,11 +241,16 @@ function isLoggedIn(req, res, next){
 // 	console.log('App on 3000');
 // });
 
+
+
 Promise.resolve()
   .then(() => {
-    mongoose.connect("mongodb+srv://mayankchauhan:essayeveryday@essayeveryday-vf1bi.mongodb.net/test?retryWrites=true&w=majority", {
-		  useNewUrlParser: true
-	  });
+   //  mongoose.connect("mongodb+srv://mayankchauhan:essayeveryday@essayeveryday-vf1bi.mongodb.net/test?retryWrites=true&w=majority", {
+		 //  useNewUrlParser: true
+	  // });
+
+	  mongoose.connect("mongodb://localhost:27017/essayEveryday", {useNewUrlParser: true});
+
   })
   .then(() => {
     app.listen(app.get("port"), function(){
